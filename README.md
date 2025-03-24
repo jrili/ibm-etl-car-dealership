@@ -7,6 +7,7 @@ _Instructions and dataset taken from IBM's [Python Project for Data Engineering]
 |Course Link | [IBM: Python Project for Data Engineering (Coursera)](https://www.coursera.org/learn/python-project-for-data-engineering) |
 | Dataset (multiple formats) | https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0221EN-SkillsNetwork/labs/module%206/Lab%20-%20Extract%20Transform%20Load/data/datasource.zip |
 | Author's Course Completion Certificate|[Certificate](https://www.coursera.org/account/accomplishments/verify/TFH7N05KO7D3) |
+| Author's Data Engineer Portfolio | [jrili/data-engineer-portfolio](https://github.com/jrili/data-engineer-portfolio) |
 
 # Dataset Details
 | Column Name | Data Type | Details                        | Expected Output |
@@ -21,6 +22,8 @@ _Instructions and dataset taken from IBM's [Python Project for Data Engineering]
 ```
 wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0221EN-SkillsNetwork/labs/module%206/Lab%20-%20Extract%20Transform%20Load/data/datasource.zip
 ```
+_Also available with sample outputs and explanations in notebook: [etl_heights_weights.ipynb](https://github.com/jrili/ibm-etl-heights-weights/blob/master/etl_heights_weights.ipynb)_
+
 > [!NOTE]
 > In case of unavailability, a snapshot of datasource.zip is also available in the root directory.
 > Date of snapshot: `2025 Mar 24`
@@ -60,6 +63,7 @@ _(Tested in Python 3.13)_
 ```
 python etl_practice.py
 ```
+_Also available with sample outputs and explanations in notebook: [etl_car_dealership.ipynb](https://github.com/jrili/ibm-etl-car-dealership/blob/master/etl_car_dealership.ipynb)_
 
 # Acknowledgements
 ## Course Instructors

@@ -13,7 +13,7 @@ _Instructions and dataset taken from IBM's [Python Project for Data Engineering]
 | ----------- | --------- |------------------------------- | --------------- |
 | car_model | string | Name of the car model  | as-is input |
 | year_of_manufacture | integer | year when car was manufactured | as-is input |
-| price | float | price of car | price rounded to 2 decimal places |
+| price | float | price of car of an unspecified currency | price rounded to 2 decimal places |
 | fuel | enum (Petroleum, Disel) | fuel type compatible with car | as-is input |
 
 # Prerequisite Steps

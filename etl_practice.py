@@ -3,8 +3,8 @@ import pandas as pd
 import xml.etree.ElementTree as ET 
 from datetime import datetime 
 
-log_file = "log_file.txt"
-target_file = "transformed_data.csv"
+LOG_FILE = "log_file.txt"
+TARGET_FILE = "transformed_data.csv"
 
 ############ Logging Methods ############
 def log(msg, console_enabled=True):
@@ -12,7 +12,7 @@ def log(msg, console_enabled=True):
     now = datetime.now()
     timestamp_str = now.strftime(timestamp_format)
 
-    with open(log_file, "a") as f:
+    with open(LOG_FILE, "a") as f:
         log_str = timestamp_str + "," + msg
         if console_enabled:
             print(log_str)
@@ -33,68 +33,46 @@ def extract_from_json(file_to_process):
 
 def extract_from_xml(file_to_process):
     log(f"In extract_from_xml(): Extracting from file '{file_to_process}'")
-    dataframe = pd.DataFrame(columns=["car_model", "year_of_manufacture", "price", "fuel"])
+    rows_list = []
     tree = ET.parse(file_to_process)
     root = tree.getroot()
     for car in root:
-        car_model = car.find("car_model").text
-        year_of_manufacture = car.find("year_of_manufacture").text
+        car_model = str(car.find("car_model").text)
+        year_of_manufacture = int(car.find("year_of_manufacture").text)
         price = float(car.find("price").text)
         fuel = car.find("fuel").text
 
-        current_dataframe = pd.DataFrame([{"car_model":car_model, "year_of_manufacture":year_of_manufacture, "price":price, "fuel":fuel}])
+        rows_list.append({"car_model":car_model, "year_of_manufacture":year_of_manufacture, "price":price, "fuel":fuel})
 
-        # To avoid FutureWarning, avoid using concat() with an empty dataframe
-        if dataframe.empty:
-            dataframe = current_dataframe.copy()
-        else:
-            dataframe = pd.concat([dataframe, current_dataframe])
-
-    return dataframe
+    return pd.DataFrame.from_dict(rows_list)
 
 def extract():
     log("In extract(): started")
     # Create empty data frame with the corresponding headers
-    extracted_data = pd.DataFrame(columns=["car_model", "year_of_manufacture", "price", "fuel"])
+    extracted_dfs_list = []
 
     # Process all CSV files
     log("In extract(): start processing CSV files")
-    for csvfile in glob.glob("*.csv"):
-        current_dataframe = extract_from_csv(csvfile)
-
-        # To avoid FutureWarning, avoid using concat() with an empty dataframe
-        if extracted_data.empty:
-            extracted_data = current_dataframe.copy()
-        else:
-            extracted_data = pd.concat([extracted_data, current_dataframe],
-                ignore_index=True)
+    for csvfile in glob.glob("datasource\*.csv"):
+        extracted_dfs_list.append(extract_from_csv(csvfile))
     log("In extract(): done processing CSV files")
 
     # Process all JSON files
     log("In extract(): start processing JSON files")
-    for jsonfile in glob.glob("*.json"):
-        current_dataframe = extract_from_json(jsonfile)
-
-        # To avoid FutureWarning, avoid using concat() with an empty dataframe
-        if extracted_data.empty:
-            extracted_data = current_dataframe.copy()
-        else:
-            extracted_data = pd.concat([extracted_data, current_dataframe],
-                ignore_index=True)
+    for jsonfile in glob.glob("datasource\*.json"):
+        extracted_dfs_list.append(extract_from_json(jsonfile))
     log("In extract(): done processing JSON files")
 
     # Process all XML files
     log("In extract(): start processing XML files")
-    for xmlfile in glob.glob("*.xml"):
-        current_dataframe = extract_from_xml(xmlfile)
-
-        # To avoid FutureWarning, avoid using concat() with an empty dataframe
-        if extracted_data.empty:
-            extracted_data = current_dataframe.copy()
-        else:
-            extracted_data = pd.concat([extracted_data, current_dataframe],
-                ignore_index=True)
+    for xmlfile in glob.glob("datasource\*.xml"):
+        extracted_dfs_list.append(extract_from_xml(xmlfile))
     log("In extract(): done processing XML files")
+
+    # Concatenate all dataframes in the extracted_dfs_list
+    # into a single DataFrame
+    # Note that ignore_index is set to True so that the index is rebuilt with properly incrementing values
+    extracted_data = pd.concat(extracted_dfs_list, ignore_index=True)
 
     log("In extract(): ended")
     return extracted_data
@@ -125,7 +103,7 @@ extracted_data = extract()
 
 transformed_data = transform(extracted_data)
 
-load_data(target_file, transformed_data)
+load_data(TARGET_FILE, transformed_data)
 
 log("ETL Job Ended\n")
 

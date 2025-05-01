@@ -1,45 +1,26 @@
-# ETL Project: Car Dealership Data
-_Instructions and dataset taken from IBM's [Python Project for Data Engineering](https://www.coursera.org/learn/python-project-for-data-engineering) from Coursera_
+ETL Project: Car Dealership Data
+===================================
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white) 
+[ETL]
 
-# Links
-|     Item       |   Link   |
-| -------------- | ---------|
-|Course Link | [IBM: Python Project for Data Engineering (Coursera)](https://www.coursera.org/learn/python-project-for-data-engineering) |
-| Dataset (multiple formats) | https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0221EN-SkillsNetwork/labs/module%206/Lab%20-%20Extract%20Transform%20Load/data/datasource.zip |
-| Author's Course Completion Certificate|[Certificate](https://www.coursera.org/account/accomplishments/verify/TFH7N05KO7D3) |
-| Author's Data Engineer Portfolio | [jrili/data-engineer-portfolio](https://github.com/jrili/data-engineer-portfolio) |
+***Part of a Data Engineer Portfolio: [jrili/data-engineer-portfolio](https://github.com/jrili/data-engineer-portfolio)***
 
-# Dataset Details
-| Column Name | Data Type | Details                        | Expected Output |
-| ----------- | --------- |------------------------------- | --------------- |
-| car_model | string | Name of the car model  | as-is input |
-| year_of_manufacture | integer | year when car was manufactured | as-is input |
-| price | float | price of car of an unspecified currency | price rounded to 2 decimal places |
-| fuel | enum (Petroleum, Disel) | fuel type compatible with car | as-is input |
+# Project Description
+This project is an Extract, Transform, Load (ETL) pipeline designed for a car dealership's data processing. It involves collecting and transforming data from different sources to prepare it for analysis and future integration into a database.
 
-# Prerequisite Steps
-## 1.  Gather the data files
-```
-wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0221EN-SkillsNetwork/labs/module%206/Lab%20-%20Extract%20Transform%20Load/data/datasource.zip
-```
-_Also available with sample outputs and explanations in notebook: [etl_heights_weights.ipynb](https://github.com/jrili/ibm-etl-heights-weights/blob/master/etl_heights_weights.ipynb)_
+# Project Objectives
+* Extract car dealership data from multiple sources
+* Cleanse, combine, and format data for consistency
+* Structure data for future use in analytics or database systems
 
-> [!NOTE]
-> In case of unavailability, a snapshot of datasource.zip is also available in the root directory.
-> Date of snapshot: `2025 Mar 24`
+# Tools & Technologies Used
+* Python 3.13
+* Pandas
+* Jupyter Notebook
 
-## 2. Unzip the downloaded file into a directory named `datasource`
-```
-unzip source.zip -d datasource
-```
-
-## 3. Install required libraries
-```
-python -m pip install -r requirements.txt
-```
-
-# Project Tasks
-
+# Specifications
 ## 1. Extraction
 Develop functions to extract from different file formats:
 - `extract_from_csv()`
@@ -58,17 +39,52 @@ Create a `log_progress()` function that writes the following to a log file:
 - event details
 - current date and time at time of event
 
-# How to execute:
+# Workflow Overview
+* Fetch data from source files (CSV, JSON, XML)
+* Combine and transform the data using Python and Pandas
+* Output the transformed data for inspection or future loading steps.
+
+# How to Execute Script:
+## Prerequisites
+### 1.  Gather the data files
+```
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0221EN-SkillsNetwork/labs/module%206/Lab%20-%20Extract%20Transform%20Load/data/datasource.zip
+```
+
+> [!NOTE]
+> In case of unavailability, a snapshot of datasource.zip is also available in the root directory.
+> Date of snapshot: `2025 Mar 24`
+
+### 2. Unzip the downloaded file into a directory named `datasource`
+```
+unzip source.zip -d datasource
+```
+
+### 3. Install required libraries
+```
+python -m pip install -r requirements.txt
+```
+
+## Execution Steps
 _(Tested in Python 3.13)_
 ```
 python etl_practice.py
 ```
 _Also available with sample outputs and explanations in notebook: [etl_car_dealership.ipynb](https://github.com/jrili/ibm-etl-car-dealership/blob/master/etl_car_dealership.ipynb)_
+# Key Learning Points
+* Building a basic ETL workflow using Python
+* Data transformation and cleaning using Pandas
+* Structuring data workflows for scalability
+
+# Future Improvements
+* Implement a data loading step to store transformed data in a relational database, e.g. PostgreSQL
+* Add automated scheduling using tools like Apache Airflow
+* Integrate validation and logging mechanisms for data quality and pipeline monitoring
 
 # Acknowledgements
-## Course Instructors
-- Ramesh Sannareddy
-- Joseph Santarcangelo
-- Abhishek Gagneja
-## Course Offered By
-* [IBM Skills Network](https://www.coursera.org/partners/ibm-skills-network)
+## Source Course
+* [IBM: Python Project for Data Engineering (Coursera)](https://www.coursera.org/learn/python-project-for-data-engineering)
+* Course Instructors:
+    * Ramesh Sannareddy
+    * Joseph Santarcangelo
+    * Abhishek Gagneja

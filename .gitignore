@@ -1,4 +1,6 @@
-datasource
+data/*.csv
+data/*.json
+data/*.xml
 *.csv
 log*.txt
 .ipynb_checkpoints/

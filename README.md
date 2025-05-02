@@ -48,6 +48,7 @@ Create a `log_progress()` function that writes the following to a log file:
 ## Prerequisites
 ### 1.  Gather the data files
 ```
+cd data
 wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0221EN-SkillsNetwork/labs/module%206/Lab%20-%20Extract%20Transform%20Load/data/datasource.zip
 ```
 
@@ -55,9 +56,9 @@ wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDevel
 > In case of unavailability, a snapshot of datasource.zip is also available in the root directory.
 > Date of snapshot: `2025 Mar 24`
 
-### 2. Unzip the downloaded file into a directory named `datasource`
+### 2. Enter `data` directory and unzip the downloaded file
 ```
-unzip source.zip -d datasource
+unzip datasource.zip
 ```
 
 ### 3. Install required libraries

@@ -3,8 +3,7 @@ import pandas as pd
 import xml.etree.ElementTree as ET 
 from datetime import datetime 
 
-LOG_FILE = "log_file.txt"
-TARGET_FILE = "transformed_data.csv"
+from src import config
 
 ############ Logging Methods ############
 def log(msg, console_enabled=True):
@@ -12,7 +11,7 @@ def log(msg, console_enabled=True):
     now = datetime.now()
     timestamp_str = now.strftime(timestamp_format)
 
-    with open(LOG_FILE, "a") as f:
+    with open(config.LOG_FILE_PATH, "a") as f:
         log_str = timestamp_str + "," + msg
         if console_enabled:
             print(log_str)
@@ -53,19 +52,19 @@ def extract():
 
     # Process all CSV files
     log("In extract(): start processing CSV files")
-    for csvfile in glob.glob("datasource\*.csv"):
+    for csvfile in glob.glob(f"{config.INPUT_FILES_DIR_PATH}\\*.csv"):
         extracted_dfs_list.append(extract_from_csv(csvfile))
     log("In extract(): done processing CSV files")
 
     # Process all JSON files
     log("In extract(): start processing JSON files")
-    for jsonfile in glob.glob("datasource\*.json"):
+    for jsonfile in glob.glob(f"{config.INPUT_FILES_DIR_PATH}\\*.json"):
         extracted_dfs_list.append(extract_from_json(jsonfile))
     log("In extract(): done processing JSON files")
 
     # Process all XML files
     log("In extract(): start processing XML files")
-    for xmlfile in glob.glob("datasource\*.xml"):
+    for xmlfile in glob.glob(f"{config.INPUT_FILES_DIR_PATH}\\*.xml"):
         extracted_dfs_list.append(extract_from_xml(xmlfile))
     log("In extract(): done processing XML files")
 
@@ -103,7 +102,7 @@ extracted_data = extract()
 
 transformed_data = transform(extracted_data)
 
-load_data(TARGET_FILE, transformed_data)
+load_data(config.OUTPUT_FILE_PATH, transformed_data)
 
 log("ETL Job Ended\n")
 

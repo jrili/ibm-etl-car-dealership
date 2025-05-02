@@ -1,6 +1,9 @@
 data/*.csv
 data/*.json
 data/*.xml
-*.csv
-log*.txt
+
+output/*.csv
+log/*.txt
+
 .ipynb_checkpoints/
+src/__pycache__/

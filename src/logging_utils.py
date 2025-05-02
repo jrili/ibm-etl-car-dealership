@@ -1,6 +1,11 @@
+import os
 from datetime import datetime 
 
 from . import config
+
+def clear_log():
+    if os.path.exists(config.LOG_FILE_PATH):
+        os.remove(config.LOG_FILE_PATH)
 
 def log(msg, tee_enabled=True):
     """Logs a message to the configured log file path
